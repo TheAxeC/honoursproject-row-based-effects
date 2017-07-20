@@ -77,7 +77,7 @@
 
 \begin{document}
 
-\title{Towards a core language with row-based effects for optimised compilation}
+\title{A core language with row-based effects for optimised compilation}
 
 \author{Axel Faes}
 \affiliation{
@@ -120,16 +120,16 @@ The current type system with subtyping becomes impractical since the typing info
 \\
 In this work, we present a simple explicitly-typed language that can serve as an intermediate language during compilation of \eff, and allows for the development of type-preserving core-to-core transformations. Optimisation and term rewriting is done using this core language. This approach will ease the development of an optimised compiler since typechecking becomes linear due to the explicit typing.
 
-\section{Background}
+\section{Background (\eff)}
 The type-\&-effect system that is used in \eff is based on subtyping and dirty types \cite{effectsystem}.
+
+\subsection{Types and terms}
 
 \paragraph{Terms}
 Figure~\ref{fig:terms:eff} shows the two types of terms in \eff. There are values $v$ and computations $c$. Computations are terms that can contain effects. Effects are denoted as operations $Op$ which can be called.
 
 \paragraph{Types}
-Figure~\ref{fig:types:eff} shows the types of \eff. There are two main sorts of types. There are (pure) types $A, B$ and dirty types $\C, \D$. A dirty type is a pure type $A$ tagged with a finite set of operations $\dirt$, which we call dirt, that can be called. The type $\C \hto \D$ is used for handlers because a handler takes an input computation $\C$, handles the effects in this computation and outputs computation $\D$ as the result.\\
-\\
-The core language with row-based effects is based on the explicitly typed language used in Links \cite{row}. Links uses a row polymorphic type-\&-effect system . The design of their calculus is partially based on the type system used by Pretnar which makes it a suitable candidate for our core language \cite{pretnar2015introduction}. The terms of the core language are seen in Figure~\ref{fig:terms:explicit}, the types are seen in the Figure~\ref{fig:types:explicit}.
+Figure~\ref{fig:types:eff} shows the types of \eff. There are two main sorts of types. There are (pure) types $A, B$ and dirty types $\C, \D$. A dirty type is a pure type $A$ tagged with a finite set of operations $\dirt$, which we call dirt, that can be called. The type $\C \hto \D$ is used for handlers because a handler takes an input computation $\C$, handles the effects in this computation and outputs computation $\D$ as the result.
 
 \begin{figure}[h]
 \begin{center}
@@ -172,6 +172,13 @@ The core language with row-based effects is based on the explicitly typed langua
 \end{center}
 \caption{Types of \eff as described in previous work}\label{fig:types:eff}
 \end{figure}
+
+\subsection{Typing rules}
+
+\section{Core language}
+The core language with row-based effects is based on the explicitly typed language used in Links \cite{row}. Links uses a row polymorphic type-\&-effect system . The design of their calculus is partially based on the type system used by Pretnar which makes it a suitable candidate for our core language \cite{pretnar2015introduction}. The terms of the core language are seen in Figure~\ref{fig:terms:explicit}, the types are seen in the Figure~\ref{fig:types:explicit}.
+
+\subsection{Types and terms}
 
 \begin{figure}[h]
 \begin{center}
@@ -219,144 +226,24 @@ The core language with row-based effects is based on the explicitly typed langua
 \caption{Types of the explicitly type core language}\label{fig:types:explicit}
 \end{figure}
 
-%\section{Approach and Uniqueness}
-\section{Results and Contributions}
-Preliminary results show that optimised compilation of \eff reaches the same performance as an implementation without algebraic effect handlers in OCaml (Figure~\ref{fig:systemsall}). Unfortunately, the development of several optimisations proved to be very error-prone, illustrating the need for an explicitly-typed core language. \\
-\\
-The proposed core language with row-based effects makes it easier to develop an optimised compiler due to the explicit typing. Since \eff focusses on ease-of-use and usability, the programmer will not be burdened with providing more type information than minimally required \cite{inferring, handling}. The combination of these languages gives the best of both worlds.
-\\
-\begin{figure}
-  \resizebox{\columnwidth}{!}{%
-\begin{tikzpicture}
-  \centering
-  \begin{axis}[
-        axis lines=center,
-        axis on top,
-        height=5cm, width=12cm,
-        % bar width=0.4cm,
-        % ymajorgrids, tick align=inside,
-        major grid style={draw=white},
-        enlarge y limits={value=.1,upper},
-        ymin=0, ymax=200,
-        axis x line*=bottom,
-        axis y line*=left,
-        % xtick = data,
-        y axis line style={opacity=1},
-        tickwidth=0pt,
-        enlarge x limits=false,
-        legend style={
-            at={(0.5,-0.12)},
-            anchor=north,
-            legend columns=-1,
-            /tikz/every even column/.append style={column sep=0.2cm},
-            font = \footnotesize
-        },
-        ylabel={Relative percentage},
-        xlabel={Problem Size},
-           % symbolic x coords={
-           % 0,
-           % 8,
-           % 9,
-           % 10,
-           % 11,
-           % 12,
-           % % 13,
-           % % 14
-           % },
-       %      nodes near coords={
-       %  \pgfmathprintnumber{\pgfplotspointmeta}
-       % }
-    ]
-    %native
-    \addplot [smooth,color = black, very thick] coordinates {
-      (2,100)
-      (3,100)
-      (4,100)
-      (5,100)
-      (6,100)
-      (7,100)
-      (8,100)
-      (9,100)
-      (10,100)
-      (11,100)
-      (12,100)
-      (13,100)
-      (14,100)
-       };
-    %multicore
-    \addplot [smooth,color = green, very thick, mark = x] coordinates {
-      (2,100)
-      (3,100)
-      (4,110)
-      (5,110)
-      (6,120)
-      (7,150)
-      (8,155)
-      (9,144)
-      (10,131)
-      (11,135)
-      (12,133)
-      (13,120)
-      (14,109)
-       };
-    %HIA
-   \addplot [smooth,color = blue, very thick, mark = o] coordinates {
-      (2,100)
-      (3,100)
-      (4,110)
-      (5,125)
-      (6,140)
-      (7,170)
-      (8,175)
-      (9,180)
-      (10,157)
-      (11,150)
-      (12,140)
-      (13,144)
-      (14,130)
-       };
-    %EffectsinOcaml
-   \addplot [smooth,color = brown, very thick, mark = +] coordinates {
-      (2,100)
-      (3,110)
-      (4,125)
-      (5,125)
-      (6,130)
-      (7,145)
-      (8,150)
-      (9,153)
-      (10,134)
-      (11,136)
-      (12,133)
-      (13,120)
-      (14,122)
-       };
-    %PureOpt
-   \addplot [smooth,color = red, very thick, mark = *] coordinates {
-      (2,100)
-      (3,100)
-      (4,100)
-      (5,100)
-      (6,105)
-      (7,105)
-      (8,100)
-      (9,107)
-      (10,91)
-      (11,95)
-      (12,97)
-      (13,99)
-      (14,95)
-       };
 
-    \legend{\ocaml, \textsc{MultiCore}, \textsc{HandlersInAction}, \textsc{EffInOCaml}, \textsc{\eff}\textsc{(PureOpt)}}
-  \end{axis}
-  \end{tikzpicture}
-  }
-\caption{Results of running N-Queens for all solutions on multiple systems}
-\label{fig:systemsall}
-\end{figure}
+\subsection{Typing rules}
 
-\noindent In this work, we presented an idea of a core language for optimised compilation. Planned in future work is the implementation. We will integrate the presented core language in the optimising compiler for \eff and benchmark its impact. The metatheory of the core language is still under development. We will test the explicitly typed core language in other typing systems. As mentioned in this work, another interesting research direction is the development of an unification based algorithm for the subtyping based type-\&-effect system which we will also explore in future work.
+
+\subsection{Operational semantics}
+
+
+\subsection{Elaboration}
+
+
+\section{Implementation}
+
+
+\section{Evaluation}
+
+
+\section{Metatheory}
+
 
 %% Acknowledgments
 \begin{acks}
