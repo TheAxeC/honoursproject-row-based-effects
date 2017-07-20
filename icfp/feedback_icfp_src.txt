@@ -1,0 +1,3 @@
+This is a very interesting proposal, and I'd like to see it presented as a poster.
+
+As a suggestion regarding the forthcoming presentation, I'd recommend to substantiate the claim "Eff does not offer explicit typing, which makes it easy for type checking bugs to be introduced during the construction of optimised compilation" from the introduction by showing an example of a bug that can be manifested at an intermediate stage of a compilation and would be caught earlier if only Eff had explicit type annotations. Next you will demonstrate how your approach fixes this problem.

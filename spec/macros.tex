@@ -1,0 +1,67 @@
+\newcommand{\lang}{\textsc{Effy}\xspace}
+\newcommand{\eff}{\textsc{Eff}\xspace}
+\newcommand{\ocaml}{\textsc{OCaml}\xspace}
+
+% Meta-syntax
+\newcommand{\bnfis}{\mathrel{\;{:}{:}\!=}\;}
+\newcommand{\bnfor}{\mathrel{\;|\;}}
+\newcommand{\defeq}{\mathrel{\;\stackrel{\text{def}}{=}\;}}
+\newcommand{\set}[1]{\{ #1 \}}
+
+% General syntactic constructs
+\newcommand{\kord}[1]{\mathtt{#1}}
+\newcommand{\kop}[1]{\;\mathtt{#1}\;}
+\newcommand{\kpre}[1]{\mathtt{#1}\;}
+\newcommand{\kpost}[1]{\;\mathtt{#1}}
+
+% Types
+\newcommand{\type}[1]{\mathtt{#1}}
+\newcommand{\boolty}{\type{bool}}
+\newcommand{\intty}{\type{int}}
+\newcommand{\hto}{\Rightarrow}
+\renewcommand{\C}{\underline{C}}
+\newcommand{\D}{\underline{D}}
+\newcommand{\dirt}{\Delta}
+\newcommand{\sig}{\Sigma}
+
+% Expressions and computations
+\newcommand{\call}[3]{{{#1}\,{#2}\,{#3}}}
+\newcommand{\case}{\mathop{\text{\texttt{|}}}}
+\newcommand{\cont}[2]{(#1.\,#2)}
+\newcommand{\const}{\kord{k}}
+\newcommand{\fls}{\kord{false}}
+\newcommand{\fun}[1]{\kpre{fun} #1 \mapsto}
+\newcommand{\handler}[1]{\{ #1 \}}
+\newcommand{\conditional}[3]{\kpre{if} #1 \kop{then} #2 \kop{else} #3}
+\newcommand{\letin}[1]{\kpre{let} #1 \kop{in}}
+\newcommand{\doin}[1]{\kpre{do} #1 \kop{ ; }}
+\newcommand{\letrecin}[1]{\kpre{let} \kpre{rec} #1 \kop{in}}
+\newcommand{\op}{\kord{Op}}
+\newcommand{\ops}{\mathcal{O}}
+\newcommand{\ocs}{\mathit{ocs}}
+\newcommand{\ocsnil}{\kord{nil}}
+\newcommand{\tru}{\kord{true}}
+\newcommand{\ret}{\kpre{return}}
+\newcommand{\withhandle}[2]{\kpre{handle} #2 \kop{with} #1}
+\newcommand{\pure}[1]{\kord{pure } #1  }
+\newcommand{\longcases}{\call{\op_1}{x}{k} \mapsto c_{\op_1}, \ldots, \call{\op_n}{x}{k} \mapsto c_{\op_n}}
+\newcommand{\shortcases}{[\call{\op}{x}{k} \mapsto c_\op]_{\op \in \ops}}
+\newcommand{\longhand}[1][\ret x \mapsto c_r]{\handler{#1, \longcases}}
+\newcommand{\shorthand}[1][\ret x \mapsto c_r]{\handler{#1, \shortcases}}
+
+% Type-checking
+\newcommand{\ctx}{\Gamma}
+\newcommand{\ent}{\vdash}
+\newcommand{\T}{\mathrel{:}}
+\newcommand{\E}{\mathrel{!}}
+\newcommand{\covers}{\mathrel{/}}
+\renewcommand{\le}{\leqslant}
+
+% Operational semantics
+\newcommand{\eval}{\Downarrow}
+\newcommand{\hs}{\mathcal{H}}
+\newcommand{\nil}{\emptyset}
+\newcommand{\cons}{\mathbin{::}}
+\newcommand{\hseval}[1][\hs]{\Downarrow_{#1}}
+\newcommand{\getval}[1]{{#1}_{\kord{val}}}
+\newcommand{\getop}[1]{{#1}_{\kord{op}}}
