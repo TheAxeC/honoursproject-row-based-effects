@@ -72,7 +72,7 @@
                             %% e.g., \cite{Baker12,Baker14,Baker16}
                             %% rendered as [2,3,4] rather than [2-4].
 
-\input{macros}
+\input{tex/macros}
 \newcommand{\todo}[1]{\textcolor{red}{\textsc{Todo:} #1}}
 
 \begin{document}
@@ -109,147 +109,34 @@ Algebraic effects and handlers are a very active area of research. An important 
 \maketitle
 
 \section{Introduction}
-\label{intro}
-Algebraic effect handling is a very active area of research. Implementations of algebraic effect handlers are becoming available. Because of this, improving performance is becoming the focus of research. A lot of research focusses on speeding up the runtime performance. However, a runtime penalty still occurs. This happens since handlers or continuations need to be repeatedly copied on the heap. Due to this, we are looking towards type-directed optimised compilation of algebraic effect handlers. We want to remove the handlers such that no copying is required and thus no runtime penalty occurs. \\
-\\
-In our ongoing research towards type-directed optimised compilation, term rewrite rules and purity aware compilation optimise away most handlers. Term rewrite rules use information of the type-\&-effect system. Term rewrite rules perform two types of actions. They remove handlers and apply effects such that eventually the program does not contain any more handlers. Term rewrite rules can also change the syntactic structure in order to expose more possibilities for optimisations. Purity aware compilation identifies computations that are effectively pure and purifies them.  \\
-\\
-\eff, an ML-style language, is being used to develop an optimised compiler for algebraic effect handlers. \eff uses a type system based on subtyping \cite{effectsystem}. As explained by Bauer and Pretnar in \cite{programming}, terms in \eff do not contain any information about computational effects. This information has to be inferred using type inference algorithms. The lack of explicit type information makes source-to-source transformations much more error-prone. Additionally, ensuring that a transformation does not break typeability becomes a time-consuming task, since we need to reconstruct types after each optimisation pass. \\
-\\
-The current type system with subtyping becomes impractical since the typing information is not explicitly contained in each term. There are several solutions to make the type system more practical. It is possible to keep subtyping, but use a unification based algorithm \cite{mlsub}. Implicit effect polymorphism can also be used \cite{impliciteff}. The option that is explored in this work, is to use a simple type-\&-effect system based on row-polymorphism \cite{type-directed, leijen2014koka, row}. \\
-\\
-In this work, we present a simple explicitly-typed language that can serve as an intermediate language during compilation of \eff, and allows for the development of type-preserving core-to-core transformations. Optimisation and term rewriting is done using this core language. This approach will ease the development of an optimised compiler since typechecking becomes linear due to the explicit typing.
+\input{tex/introduction}
+\input{tex/example}
 
 \section{Background (\eff)}
-The type-\&-effect system that is used in \eff is based on subtyping and dirty types \cite{effectsystem}.
-
-\subsection{Types and terms}
-
-\paragraph{Terms}
-Figure~\ref{fig:terms:eff} shows the two types of terms in \eff. There are values $v$ and computations $c$. Computations are terms that can contain effects. Effects are denoted as operations $Op$ which can be called.
-
-\paragraph{Types}
-Figure~\ref{fig:types:eff} shows the types of \eff. There are two main sorts of types. There are (pure) types $A, B$ and dirty types $\C, \D$. A dirty type is a pure type $A$ tagged with a finite set of operations $\dirt$, which we call dirt, that can be called. The type $\C \hto \D$ is used for handlers because a handler takes an input computation $\C$, handles the effects in this computation and outputs computation $\D$ as the result.
-
-\begin{figure}[h]
-\begin{center}
-\framebox{
-\begin{minipage}{0.98\columnwidth}
-\[\begin{array}{r@{~}c@{~}l@{\quad}l}
-  \text{value}~v & \bnfis {} & x & \text{variable} \\
-    & \bnfor & \const & \text{constant} \\
-    & \bnfor & \fun{x} c & \text{function} \\
-    & \bnfor & \{ & \text{handler} \\
-    & & \quad \ret x \mapsto c_r, & \quad\text{return case} \\
-    & & \quad \shortcases & \quad\text{operation cases} \\
-    & & \} & \\
-  \text{comp}~c & \bnfis & v_1 \, v_2 & \text{application} \\
-    & \bnfor & \letrecin{f \, x = c_1} c_2 & \text{rec definition} \\
-    & \bnfor & \ret v  & \text{returned val} \\
-    & \bnfor & \op \, v & \text{operation call} \\
-    & \bnfor & \doin{x \leftarrow c_1} c_2 & \text{sequencing} \\
-    & \bnfor & \withhandle{v}{c} & \text{handling}
-\end{array}\]
-\end{minipage}
-}
-\end{center}
-\caption{Terms of \eff as described in previous work}\label{fig:terms:eff}
-\end{figure}
-\begin{figure}
-\begin{center}
-\framebox{
-\begin{minipage}{0.98\columnwidth}
-\[\begin{array}{r@{~}c@{~}l@{\quad}l}
-  \text{(pure) type}~A, B & \bnfis {}
-    & \boolty \bnfor \intty & \text{basic types} \\
-    & \bnfor & A \to \C & \text{function type} \\
-    & \bnfor & \C \hto \D & \text{handler type} \\
-  \text{dirty type}~\C, \D & \bnfis {} & A \E \dirt \\
-  \text{dirt}~\dirt & \bnfis {} &\set{\op_1, \dots, \op_n}
-\end{array}\]
-\end{minipage}
-}
-\end{center}
-\caption{Types of \eff as described in previous work}\label{fig:types:eff}
-\end{figure}
-
-\subsection{Typing rules}
+\input{tex/eff-intro}
+\input{tex/eff-types}
+\input{tex/eff-type-system}
 
 \section{Core language}
-The core language with row-based effects is based on the explicitly typed language used in Links \cite{row}. Links uses a row polymorphic type-\&-effect system . The design of their calculus is partially based on the type system used by Pretnar which makes it a suitable candidate for our core language \cite{pretnar2015introduction}. The terms of the core language are seen in Figure~\ref{fig:terms:explicit}, the types are seen in the Figure~\ref{fig:types:explicit}.
+\input{tex/core-intro}
+\input{tex/core-types}
+\input{tex/core-type-system}
+\input{tex/core-operational-semantics}
 
-\subsection{Types and terms}
+\section{Elaboration}
+\input{tex/elaboration}
 
-\begin{figure}[h]
-\begin{center}
-\framebox{
-\begin{minipage}{0.98\columnwidth}
-\[\begin{array}{r@{~}c@{~}l@{\quad}l}
-  \text{value}~v & \bnfis {} & x & \text{variable} \\
-    & \bnfor & \const & \text{constant} \\
-    & \bnfor & \lambda (x : A). c & \text{\textbf{function}} \\
-    & \bnfor & \Lambda \alpha . c & \text{\textbf{type abstraction}} \\
-    & \bnfor & \{ & \text{handler} \\
-    & & \quad \ret x \mapsto c_r, & \quad\text{return case} \\
-    & & \quad \shortcases & \quad\text{operation cases} \\
-    & & \} & \\
-  \text{comp}~c & \bnfis & v_1 \, v_2 & \text{application} \\
-    & \bnfor & v \, A & \text{\textbf{type application}} \\
-    & \bnfor & \letrecin{f \, x = c_1} c_2 & \text{rec definition} \\
-    & \bnfor & \ret v  & \text{returned val} \\
-    & \bnfor & \op \, v & \text{operation call} \\
-    & \bnfor & \doin{x \leftarrow c_1} c_2 & \text{sequencing} \\
-    & \bnfor & \withhandle{v}{c} & \text{handling}
-\end{array}\]
-\end{minipage}
-}
-\end{center}
-\caption{Terms of the explicitly typed core language}\label{fig:terms:explicit}
-\end{figure}
+\section{Proofs}
+\input{tex/proofs}
 
-\begin{figure}
-\begin{center}
-\framebox{
-\begin{minipage}{0.98\columnwidth}
-\[\begin{array}{r@{~}c@{~}l@{\quad}l}
-  \text{(pure) type}~A, B & \bnfis {}
-    & A \to \C & \text{function type} \\
-    & \bnfor & \C \hto \D & \text{handler type} \\
-    & \bnfor & \alpha & \text{\textbf{type variable}} \\
-    & \bnfor & \forall \alpha . \C & \text{\textbf{polytype}} \\
-  \text{dirty type}~\C, \D & \bnfis {} & A \E \dirt \\
-  \text{dirt}~\dirt & \bnfis {} &\set{\op_1, \dots, \op_n}
-\end{array}\]
-\end{minipage}
-}
-\end{center}
-\caption{Types of the explicitly type core language}\label{fig:types:explicit}
-\end{figure}
-
-
-\subsection{Typing rules}
-
-
-\subsection{Operational semantics}
-
-
-\subsection{Elaboration}
-
-
-\section{Implementation}
-
-
-\section{Evaluation}
-
-
-\section{Metatheory}
-
+\section{Conclusion}
+\input{tex/conclusion}
 
 %% Acknowledgments
 \begin{acks}
   I would like to thank Amr Hany Saleh for his continuous guidance and help. I would also like to thank Matija Pretnar for his support during my research.
 \end{acks}
 
-\bibliography{main}
+\bibliography{bib/main}
 
 \end{document}

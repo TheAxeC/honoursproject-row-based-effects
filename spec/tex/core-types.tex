@@ -1,0 +1,51 @@
+\subsection{Types and terms}
+\todo{types and terms}
+\begin{figure}[h]
+\begin{center}
+\framebox{
+\begin{minipage}{0.98\columnwidth}
+\[\begin{array}{r@{~}c@{~}l@{\quad}l}
+  \text{value}~v & \bnfis {} & x & \text{variable} \\
+    & \bnfor & \const & \text{constant} \\
+    & \bnfor & \lambda (x : A). c & \text{\textbf{function}} \\
+    & \bnfor & \Lambda \alpha . c & \text{\textbf{type abstraction}} \\
+    & \bnfor & \{ & \text{handler} \\
+    & & \quad \ret x \mapsto c_r, & \quad\text{return case} \\
+    & & \quad \shortcases & \quad\text{operation cases} \\
+    & & \} & \\
+  \text{comp}~c & \bnfis & v_1 \, v_2 & \text{application} \\
+    & \bnfor & v \, A & \text{\textbf{type application}} \\
+    & \bnfor & \letrecin{f \, x = c_1} c_2 & \text{rec definition} \\
+    & \bnfor & \ret v  & \text{returned val} \\
+    & \bnfor & \op \, v & \text{operation call} \\
+    & \bnfor & \doin{x \leftarrow c_1} c_2 & \text{sequencing} \\
+    & \bnfor & \withhandle{v}{c} & \text{handling}
+\end{array}\]
+\end{minipage}
+}
+\end{center}
+\caption{Terms of the explicitly typed core language}\label{fig:terms:explicit}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\framebox{
+\begin{minipage}{0.98\columnwidth}
+\[\begin{array}{r@{~}c@{~}l@{\quad}l}
+  \text{(pure) type}~A, B & \bnfis {}
+    & A \to \C & \text{function type} \\
+    & \bnfor & \C \hto \D & \text{handler type} \\
+    & \bnfor & \alpha & \text{\textbf{type variable}} \\
+    & \bnfor & \forall \alpha . \C & \text{\textbf{polytype}} \\
+  \text{dirty type}~\C, \D & \bnfis {} & A \E \dirt \\
+  \text{dirt}~\dirt & \bnfis {} & \{\text{R}\} \\
+  \text{R} & \bnfis {}
+    & \op \row & \text{row} \\
+    & \bnfor & \delta & \text{row variable} \\
+    & \bnfor & . & \text{end of row}
+\end{array}\]
+\end{minipage}
+}
+\end{center}
+\caption{Types of the explicitly type core language}\label{fig:types:explicit}
+\end{figure}

@@ -25,6 +25,8 @@
 \newcommand{\sig}{\Sigma}
 
 % Expressions and computations
+\newcommand{\funtyped}[2]{\kpre{fun} #1 \T #2 \mapsto}
+
 \newcommand{\call}[3]{{{#1}\,{#2}\,{#3}}}
 \newcommand{\case}{\mathop{\text{\texttt{|}}}}
 \newcommand{\cont}[2]{(#1.\,#2)}
@@ -44,12 +46,13 @@
 \newcommand{\ret}{\kpre{return}}
 \newcommand{\withhandle}[2]{\kpre{handle} #2 \kop{with} #1}
 \newcommand{\pure}[1]{\kord{pure } #1  }
-\newcommand{\longcases}{\call{\op_1}{x}{k} \mapsto c_{\op_1}, \ldots, \call{\op_n}{x}{k} \mapsto c_{\op_n}}
-\newcommand{\shortcases}{[\call{\op}{x}{k} \mapsto c_\op]_{\op \in \ops}}
+\newcommand{\longcases}{\call{\op_1}{y}{k} \mapsto c_{\op_1}, \ldots, \call{\op_n}{x}{k} \mapsto c_{\op_n}}
+\newcommand{\shortcases}{[\call{\op}{y}{k} \mapsto c_\op]_{\op \in \ops}}
 \newcommand{\longhand}[1][\ret x \mapsto c_r]{\handler{#1, \longcases}}
 \newcommand{\shorthand}[1][\ret x \mapsto c_r]{\handler{#1, \shortcases}}
 
 % Type-checking
+\newcommand{\row}{\mathrel{;} R}
 \newcommand{\ctx}{\Gamma}
 \newcommand{\ent}{\vdash}
 \newcommand{\T}{\mathrel{:}}

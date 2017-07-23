@@ -1,0 +1,102 @@
+\todo{elaboration}
+
+
+\begin{figure}
+\begin{center}
+\framebox{
+\begin{minipage}{0.95\columnwidth}
+\[\begin{array}{r@{~}c@{~}l}
+  \text{typing contexts}~\ctx & \bnfis {} & \epsilon \bnfor \ctx, x : A\\
+\end{array}\]
+\textbf{Expressions}
+\begin{mathpar}
+  \inferrule[Val]{
+  }{
+    \ctx \ent v \T A \leadsto v'
+  }
+
+  \inferrule[Var]{
+    (x \T S) \in \ctx \\
+    S = \forall \bar{\alpha} . A
+  }{
+    \ctx \ent x \T A[\bar{S}/\bar{\alpha}] \leadsto x \, \bar{S'}
+  }
+
+  \inferrule[Const]{
+    (\const \T A) \in \sig
+  }{
+    \ctx \ent \const \T A \leadsto \const'
+  }
+
+  \inferrule[Fun]{
+    \ctx, x \T A \ent c \T \C \leadsto c' 
+  }{
+    \ctx \ent \fun{x} c \T A \to \C \leadsto \lambda (x \T A) . c' \T A \to \C
+  }
+
+  \inferrule[???Hand???]{
+    \ctx, x \T A \ent c_r \T B \E \dirt \\
+    \Big[
+      (\op \T A_\op \to B_\op) \in \sig \qquad \\
+      \ctx, x \T A_\op, k \T B_\op \to B \E \dirt \ent c_\op \T B \E \dirt
+    \Big]_{\op \in \ops}
+  }{
+    \ctx \ent \shorthand \T \\ A \E \dirt \cup \ops \hto B \E \dirt
+  }
+\end{mathpar}
+\textbf{Computations}
+\begin{mathpar}
+  \inferrule[Comp]{
+  }{
+    \ctx \ent c \T \C' \leadsto c'
+  }
+
+  \inferrule[App]{
+    \ctx \ent v_1 \T A \to \C \leadsto v'_1 \\ 
+    \ctx \ent v_2 \T A \leadsto v'_2
+  }{
+    \ctx \ent v_1 \, v_2 \T \C \leadsto v'_1 \, v'_2 \T \C
+  }
+
+ \inferrule[LetRec]{
+    \ctx, f \T A \to \C, x \T A \ent c_1 \T \C \leadsto c'_1 s\\
+    \ctx, f \T A \to \C \ent c_2 \T \D \leadsto c'_2
+  }{
+    \ctx \ent \letrecin{f \, x = c_1} c_2 \T \D \\ \leadsto \letrecin{f \, x = c'_1} c'_2 \T \D
+  }
+
+  \inferrule[Ret]{
+    \ctx \ent v \T A \leadsto v'
+  }{
+    \ctx \ent \ret v \T A \E \emptyset \leadsto \ret v' \T A \E \emptyset
+  }
+
+  \inferrule[Op]{
+    (\op \T A \to B) \in \sig \\
+    \C = B \E \{\op \row \} \\
+    \ctx \ent v \T A \leadsto v'
+  }{
+    \ctx \ent \op \, v \T \C \leadsto \op \, v' \T \C
+  }
+
+  \inferrule[Do]{
+    \ctx \ent c_1 \T \C \leadsto c'_1 \\
+    S = \forall \bar{\alpha} . A \\
+    \bar{\alpha} = FTV(A) - TV(\ctx) \\
+    \ctx, x \T S \ent \D \leadsto c'_2
+  }{
+    \ctx \ent \doin{x \leftarrow c_1} c_2 \T \D \leadsto (\lambda (x \T A) . c'_2) (\Lambda \bar{\alpha} . c'_1)
+  }
+
+  \inferrule[With]{
+    \ctx \ent v \T \C \hto \D \leadsto v' \\
+    \ctx \ent c \T \C \leadsto c'
+  }{
+    \ctx \ent \withhandle{v}{c} \T \D \leadsto \withhandle{v'}{c'} \T \D
+  }
+\end{mathpar}
+\end{minipage}
+}
+\end{center}
+\caption{Elaboration of source to core language}\label{fig:elaboration}
+\end{figure}

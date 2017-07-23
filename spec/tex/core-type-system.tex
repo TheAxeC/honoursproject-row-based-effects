@@ -1,0 +1,112 @@
+\subsection{Typing rules}
+\todo{typing rules}
+
+\begin{figure}
+\begin{center}
+\framebox{
+\begin{minipage}{0.95\columnwidth}
+\[\begin{array}{r@{~}c@{~}l}
+  \text{typing contexts}~\ctx & \bnfis {} & \epsilon \bnfor \ctx, x : A\\
+\end{array}\]
+\textbf{Expressions}
+\begin{mathpar}
+  \inferrule[Val]{
+  }{
+    \ctx \ent v \T A
+  }
+
+  \inferrule[Var]{
+    (x \T A) \in \ctx
+  }{
+    \ctx \ent x \T A
+  }
+
+  \inferrule[Const]{
+    (\const \T A) \in \sig
+  }{
+    \ctx \ent \const \T A
+  }
+
+  \inferrule[Fun]{
+    \ctx, x \T A \ent c \T \C
+  }{
+    \ctx \ent \lambda(x \T A). c \T A \to \C
+  }
+
+  \inferrule[Type Abstraction]{
+    \ctx, \alpha \ent c \T \C
+  }{
+    \ctx \ent \Lambda \alpha . c \T \forall \alpha . \C
+  }
+  
+  \inferrule[Hand]{
+  	\C = A \E \{Op_i \row\} \\
+  	\D = B \E \{Op_i \row\} \\
+  	(\op_i \T A_\op \to B_\op) \in \sig \qquad \\
+  	h = \shorthand \\
+  	\ctx, x \T A_\op \ent c_r \T \D \\
+  	\ctx, y \T A_\op, k \T B_\op \to \D \ent c_{op} \T \D \\
+  }{
+  	\ctx \ent h \T \C \hto \D
+  }
+\end{mathpar}
+\textbf{Computations}
+\begin{mathpar}
+  \inferrule[Comp]{
+  }{
+    \ctx \ent c \T \C
+  }
+
+  \inferrule[App]{
+    \ctx \ent v_1 \T A \to \C \\
+    \ctx \ent v_2 \T A
+  }{
+    \ctx \ent v_1 \, v_2 \T \C
+  }
+
+  \inferrule[Type App]{
+    \ctx \ent v \T \forall \alpha . \C
+  }{
+    \ctx \ent v \, A \T \C[A/\alpha]
+  }
+
+ \inferrule[LetRec]{
+    \ctx, f \T A \to \C, x \T A \ent c_1 \T \C \\
+    \ctx, f \T A \to \C \ent c_2 \T \D
+  }{
+    \ctx \ent \letrecin{f \, x = c_1} c_2 \T \D
+  }
+
+  \inferrule[Ret]{
+    \ctx \ent v \T A
+  }{
+    \ctx \ent \ret v \T A \E \emptyset
+  }
+
+  \inferrule[Op]{
+    (\op \T A \to B) \in \sig \\
+    \ctx \ent v \T A \\
+    \C \T B \E \{\op \row\}
+  }{
+    \ctx \ent \op \, v \T \C
+  }
+
+  \inferrule[Do]{
+    \ctx \ent c_1 \T A \E \dirt \\
+    \ctx, x \T A \ent c_2 \T B \E \dirt
+  }{
+    \ctx \ent \doin{x \leftarrow c_1} c_2 \T B \E \dirt
+  }
+
+  \inferrule[With]{
+    \ctx \ent v \T \C \hto \D \\
+    \ctx \ent c \T \C
+  }{
+    \ctx \ent \withhandle{v}{c} \T \D
+  }
+\end{mathpar}
+\end{minipage}
+}
+\end{center}
+\caption{Typing of the explicitly typed language}\label{fig:core-typing}
+\end{figure}
