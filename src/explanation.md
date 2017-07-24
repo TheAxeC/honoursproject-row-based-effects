@@ -9,45 +9,45 @@
 
 ## Utils and Utils-old
 ### Utils
-`const.ml`
+`const.ml` defines print, compare and constant definitions.
 
-`error.ml`
+`error.ml` defines strings for error messages.
 
-`location.ml`
+`location.ml` defines methods used to determine the location of code in the source file.
 
-`poset.ml`
+`poset.ml` defines a partially ordered set.
 
-`print.ml`
+`print.ml` defines some common printing utilities.
 
-`symbol.ml`
+`symbol.ml` contains methods that define how some symbols (such as handler arrow, subscripts, etc) need to be printed.
 
-`trio.ml`
+`trio.ml` defines methods related to type_params, dirt_params and region_params.
 
 ### Utils-old
-`common.ml`
+`common.ml` defines some auxiliary functions mostly related to map manipulations.
 
-`pattern.ml`
+`pattern.ml` contains some general pattern related methods.
 
-`symbols.ml`
+`symbols.ml` contains methods that define how some symbols (such as handler arrow, subscripts, etc) need to be printed.
 
 ## Typing
-`constraints.ml`
+`constraints.ml` contains the representation of constraints and unification.
 
-`exhaust.ml`
+`exhaust.ml` checks for exhaustiveness.
 
-`infer.ml`
+`infer.ml` implements the type inference algorithm. It does the conversion from untyped to typed.
 
-`params.ml`
+`params.ml` defines the ty_param, dirt_param and region_param
 
-`scheme.ml`
+`scheme.ml` defines the type schemes.
 
-`smartPrint.ml`
+`smartPrint.ml` defines a smart (purity) printer.
 
-`tctx.ml`
+`tctx.ml` defines type inference contexts.
 
-`type.ml`
+`type.ml` defines some basic types.
 
-`typingEnv.ml`
+`typingEnv.ml` defines a map (and functions) used for the environment.
 
 ## Runtime
 `eval.ml` contains the main evaluation functions for the intermediate language.
@@ -88,5 +88,6 @@ This folder contains the code that executes the term rewriting and the purity ch
 * math functions
 
 ## Recommended starting point
-start with changing typed.ml so it compiles
-then change `typing/`
+start with changing `syntax/typed.ml` so eff still compiles, afterwards change `typing/`.
+
+`exec_cmd` in `shell.ml` also needs to be changed as it implements the toplevel.
