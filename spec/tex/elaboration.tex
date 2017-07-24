@@ -29,12 +29,12 @@
   }
 
   \inferrule[Fun]{
-    \ctx, x \T A \ent c \T \C \leadsto c' 
+    \ctx, x \T A \ent c \T \C \leadsto c'
   }{
     \ctx \ent \fun{x} c \T A \to \C \leadsto \lambda (x \T A) . c' \T A \to \C
   }
 
-  \inferrule[???Hand???]{
+  \inferrule[Hand]{
     \ctx, x \T A \ent c_r \T B \E \dirt \\
     \Big[
       (\op \T A_\op \to B_\op) \in \sig \qquad \\
@@ -42,6 +42,17 @@
     \Big]_{\op \in \ops}
   }{
     \ctx \ent \shorthand \T \\ A \E \dirt \cup \ops \hto B \E \dirt
+  }
+
+  \inferrule[Hand]{
+  	\C = A \E \{Op_i \row\} \\
+  	\D = B \E \{Op_i \row\} \\
+  	(\op_i \T A_\op \to B_\op) \in \sig \qquad \\
+  	h = \shorthand \\ \leadsto h' = \shorthandelab \\
+  	\ctx, x \T A_\op \ent c_r \T \D \leadsto c'_r \T \D \\
+  	\ctx, y \T A_\op, k \T B_\op \to \D \ent c_{op} \T \D \leadsto c'_{op} \T \D\\
+  }{
+  	\ctx \ent h \T \C \hto \D \leadsto h' \T \C \hto \D
   }
 \end{mathpar}
 \textbf{Computations}
@@ -52,7 +63,7 @@
   }
 
   \inferrule[App]{
-    \ctx \ent v_1 \T A \to \C \leadsto v'_1 \\ 
+    \ctx \ent v_1 \T A \to \C \leadsto v'_1 \\
     \ctx \ent v_2 \T A \leadsto v'_2
   }{
     \ctx \ent v_1 \, v_2 \T \C \leadsto v'_1 \, v'_2 \T \C
