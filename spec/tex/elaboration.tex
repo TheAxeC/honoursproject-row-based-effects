@@ -55,6 +55,20 @@
   	\ctx \ent h \T \C \hto \D \leadsto h' \T \C \hto \D
   }
 \end{mathpar}
+\end{minipage}
+}
+\end{center}
+\caption{Elaboration of source to core language: expressions}\label{fig:elaboration}
+\end{figure}
+
+
+\begin{figure}
+\begin{center}
+\framebox{
+\begin{minipage}{0.95\columnwidth}
+\[\begin{array}{r@{~}c@{~}l}
+  \text{typing contexts}~\ctx & \bnfis {} & \epsilon \bnfor \ctx, x : A\\
+\end{array}\]
 \textbf{Computations}
 \begin{mathpar}
   \inferrule[Comp]{
@@ -109,5 +123,5 @@
 \end{minipage}
 }
 \end{center}
-\caption{Elaboration of source to core language}\label{fig:elaboration}
+\caption{Elaboration of source to core language: computations}\label{fig:elaboration}
 \end{figure}

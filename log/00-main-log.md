@@ -67,11 +67,19 @@ Towards a core language with row-based effects for optimised compilation
 Algebraic effects and handlers are a very active area of research. An important aspect is the development of an optimising compiler. Eff is an ML-style language with support for effects and forms the testbed for the optimising compiler. However, Eff does not offer explicit typing, which makes it easy for type checking bugs to be introduced during the construction of optimised compilation. This work presents a new core language with row-based effects. The core language is explicitly typed in order to reduce bugs in the optimised compilation.
 
 ## Start implementation (July - September 2017)
+
+## July 16 - July 20
 I made a new branch: rowbased. In this branch, I will implement the new type-&-effect system.
 
 The first thing I did was to remove the `check` keyword. This keyword was unused and removing it cleans up the code.
 
+### July 20 - August 2
 I made some diagrams on paper to get a good view of the compilation pipeline. This quick diagram evolved into a thorough study of the compiler in order to deepen my insight.
+
+I went through the code in order to understand the current type inference algorithm. I did this by tracing the execution of a simple program, as well as "rebuilding" the current inference engine. This was much more time consuming than I expected it to be.
+
+* Coercions => no more scheme
+* Polytype describe possible types
 
 ## Achievements
 - Completed literature study
