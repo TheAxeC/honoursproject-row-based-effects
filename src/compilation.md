@@ -70,6 +70,9 @@ optimization is done by going through the AST Depth First and performing optimiz
 Finally, the code is printed in OCaml code. printing can be done in two ways. There is simple printing and pure printing. Simple printing goes through the AST and prints each node as-is. The pure printing also performs a purity check. Should a computation be pure, the computation is printed as an expression (which executes faster).
 
 ## Inference
+Inference is done by going to the Untyped AST. Each node is converted to a Typed node. Typing information is kept using a typing context and a state, which contains the (local) typing environment and the defined effects.
+
+The are 4 different distinctions to be made in Nodes. There are toplevel computations, computations, expressions and patterns. Inferring a node is done in a structured fashion. First, the (typed) term is reconstructed, then a scheme is constructed. This scheme is filled with a context and with constraints. Finally, the term and the scheme are packed together with a location.
 
 ### Shadowing
 The state is altered in order to store variables and effects
