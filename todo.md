@@ -2,15 +2,14 @@
 
 * poster for ICFP SRC
 * complete the spec (explanation)
-* explain compilation (inference)
 * implementation
-  * add beautify/printing
-  * add ty constraint
-  * extend types
-  * dirt constraints (row polymorphism)
-  * complete inference
+  * fix beautify/printing (constraints)
+  * extend types (let, letrec, match, patterns)
+  * dirt constraints (row polymorphism => handle, handler, effect)
+  * complete inference (tuple, record, variant, patterns)
   * typeOf
   * remove region (params, smartPrint, tctx, sugared, desugar/parser, type)
   * unification
-  * optimisation and code printing
-  * code cleanup (typed, untyped, type)
+  * optimisation (codegen) and code printing (runtime)
+  * code cleanup (typed, untyped, type // params, tctx ==> syntax, typing)
+  * code cleanup (parsing, utils, utils-old)
