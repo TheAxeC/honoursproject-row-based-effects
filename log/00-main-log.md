@@ -8,7 +8,10 @@ This is my main log file for the honoursprogramme. Weekly progress will be recor
 | time early (april-may) literature study | ~40 hours |
 | time late (june-july) literature study | ~40 hours |
 | time creating type system | ~20 hours |
-| total time | 20 + 40 + 40 + 20 = 120 hours |
+| time implementation part 1 | ~80 hours  |
+| time creating poster | ~8 hours  |
+| ICFP 2017 | 6 * 9 = 54 |
+| total time | 20 + 40 + 40 + 20 + 50 + 8 + 54 = 262 hours |
 | Approximate time required | ~270 |
 
 ## Meetings
@@ -28,6 +31,8 @@ This is my main log file for the honoursprogramme. Weekly progress will be recor
 | 6 July 2017   | Discussion of revision of type-&-effect system |
 | 10 July 2017   | Discussion of ICFP SRC paper |
 | 14 July 2017   | Meeting to discuss compiler (to start on implementation) |
+| 4 September 2017   | Poster presentation ICFP SRC  |
+| 6 September 2017   | Presentation ICFP SRC |
 
 ## ICFP paper (April - May 2017)
 During my first honoursprogramme, I co-authored a paper which was sent to ICFP. The honoursproject ended before we received feedback from ICFP. When feedback was received, changes had to be made. These changes for me include:
@@ -81,6 +86,13 @@ I went through the code in order to understand the current type inference algori
 * Coercions => no more scheme
 * Polytype describe possible types
 
+### August 17 - September 2
+Implementation
+
+### September 2 - 10
+ICFP 2017
+
 ## Achievements
 - Completed literature study
 - Wrote extended abstract for ICFP SRC
+- 3rd place in ICFP 2017 SRC

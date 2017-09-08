@@ -1,6 +1,5 @@
 # Todo
 
-* poster for ICFP SRC
 * complete the spec (explanation)
 * implementation
   * extend types (tuple, let, letrec, match, typeOf) + unification
