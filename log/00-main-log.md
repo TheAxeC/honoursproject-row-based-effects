@@ -9,9 +9,9 @@ This is my main log file for the honoursprogramme. Weekly progress will be recor
 | time late (june-july) literature study | ~40 hours |
 | time creating type system | ~20 hours |
 | time implementation part 1 | ~80 hours  |
-| time creating poster | ~8 hours  |
+| time creating poster | ~16 hours  |
 | ICFP 2017 | 6 * 9 = 54 |
-| total time | 20 + 40 + 40 + 20 + 50 + 8 + 54 = 262 hours |
+| total time | 20 + 40 + 40 + 20 + 50 + 16 + 54 = 270 hours |
 | Approximate time required | ~270 |
 
 ## Meetings
