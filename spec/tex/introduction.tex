@@ -8,4 +8,26 @@ In our ongoing research towards type-directed optimised compilation, term rewrit
 \\
 The current type system with subtyping becomes impractical since the typing information is not explicitly contained in each term. There are several solutions to make the type system more practical. It is possible to keep subtyping, but use a unification based algorithm \cite{mlsub}. Implicit effect polymorphism can also be used \cite{impliciteff}. The option that is explored in this work, is to use a simple type-\&-effect system based on row-polymorphism \cite{type-directed, leijen2014koka, row}. \\
 \\
-In this work, we present a simple explicitly-typed language that can serve as an intermediate language during compilation of \eff, and allows for the development of type-preserving core-to-core transformations. Optimisation and term rewriting is done using this core language. This approach will ease the development of an optimised compiler since typechecking becomes linear due to the explicit typing.
+In this work, we present a simple explicitly-typed language that can serve as an intermediate language during compilation of \eff, and allows for the development of type-preserving core-to-core transformations. Optimisation and term rewriting is done using this core language. This approach will ease the development of an optimised compiler since typechecking becomes linear due to the explicit typing.\\
+\\
+Below is an example program:
+\begin{lstlisting}[language=Caml]
+effect Op : unit -> int;;
+let rec x () = #Op ();;
+let result =
+  handle (x ()) with
+    | #Op () k -> k 1
+\end{lstlisting}
+This program will be optimised into the code below after applying a function specialization optimization. The function 'x' is specialized and the handler is brought inside the function. Implementing this optimization requires indepth knowledge of the typing system that is used. The subtyping-based approach for the type system is difficult to use and does not contain explicit typing information. This makes source-to-source transformations error prone and
+ensuring transformations do not break typability is time consuming.
+
+\begin{lstlisting}[language=Caml]
+effect Op : unit -> int;;
+let rec x () = #Op ();;
+let result =
+  let rec x_spec () =
+    handle (#Op ()) with
+    | #Op () k -> k 1
+  in
+  x_spec ()
+\end{lstlisting}

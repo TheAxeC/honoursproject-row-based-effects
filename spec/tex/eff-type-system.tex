@@ -1,16 +1,15 @@
 \subsection{Type System}
 
 \subsubsection{Subtyping}
-\todo{subtyping}
-% The dirty type $A \E \dirt$ is assigned to a computation returning values of type $A$
-% and potentially calling operations from the set $\dirt$.
-% This set $\dirt$ is always an over-approximation of the actually called operations, and
-% may safely be increased, inducing a natural
-% subtyping judgement $A \E \dirt \leq A \E \dirt'$ on dirty types. As dirty
-% types can occur inside pure types, we also get a derived subtyping judgement on
-% pure types. Both judgements are defined in Figure~\ref{fig:subtyping}.
-% Observe that, as usual, subtyping is contravariant in the argument types of
-% functions and handlers, and covariant in their return types.
+The dirty type $A \E \dirt$ is assigned to a computation returning values of type $A$
+and potentially calling operations from the set $\dirt$.
+This set $\dirt$ is always an over-approximation of the actually called operations, and
+may safely be increased, inducing a natural
+subtyping judgement $A \E \dirt \leq A \E \dirt'$ on dirty types. As dirty
+types can occur inside pure types, we also get a derived subtyping judgement on
+pure types. Both judgements are defined in Figure~\ref{fig:subtyping}.
+Observe that, as usual, subtyping is contravariant in the argument types of
+functions and handlers, and covariant in their return types.
 
 \begin{figure}[t!]
 \begin{center}
@@ -58,27 +57,26 @@
 \subsubsection{Typing rules}
 Figure~\ref{fig:eff-typing} defines the typing judgements for values and computations with respect to a standard typing context $\ctx$. \\
 \\
-\todo{values and terms}
-% \paragraph{Values}
-% The rules for subtyping, variables, and functions are entirely
-% standard. For constants we assume a signature $\sig$ that assigns a type~$A$
-% to each constant~$\const$, which we write as $(\const \T A) \in \sig$.
-%
-% A handler expression has type $A \E \dirt \cup \ops \hto B \E \dirt$
-% iff all branches (both the operation cases and the return case) have dirty type $B \E \dirt$
-% and the operation cases cover the set of operations $\ops$. Note that the intersection $\dirt \cap \ops$ is not necessarily empty. The handler deals with the operations $\ops$, but in the process may re-issue some of them (i.e., $\dirt \cap \ops$).
-%
-% When typing operation cases, the given signature for the operation $(\op \T A_\op \to B_\op) \in \sig$
-% determines the type $A_\op$ of the parameter $x$ and the domain $B_\op$ of the continuation $k$. As our handlers are deep, the codomain of $k$ should be the same as the type $B \E \dirt$ of the cases.
-%
-% \paragraph{Computations}
-% With the following exceptions, the typing judgement $\ctx \ent c : \C$ has a
-% straightforward definition. The $\ret$ construct renders a value $v$ as a pure
-% computation, i.e., with empty dirt. An operation invocation $\op\,v$ is typed
-% according to the operation's signature, with the operation itself as its only
-% operation. Finally,
-% rule \textsc{With} shows that a handler with type $\C \hto \D$
-% transforms a computation with type $\C$ into a computation with type $\D$.
+\paragraph{Values}
+The rules for subtyping, variables, and functions are entirely
+standard. For constants we assume a signature $\sig$ that assigns a type~$A$
+to each constant~$\const$, which we write as $(\const \T A) \in \sig$.
+
+A handler expression has type $A \E \dirt \cup \ops \hto B \E \dirt$
+iff all branches (both the operation cases and the return case) have dirty type $B \E \dirt$
+and the operation cases cover the set of operations $\ops$. Note that the intersection $\dirt \cap \ops$ is not necessarily empty. The handler deals with the operations $\ops$, but in the process may re-issue some of them (i.e., $\dirt \cap \ops$).
+
+When typing operation cases, the given signature for the operation $(\op \T A_\op \to B_\op) \in \sig$
+determines the type $A_\op$ of the parameter $x$ and the domain $B_\op$ of the continuation $k$. As our handlers are deep, the codomain of $k$ should be the same as the type $B \E \dirt$ of the cases.
+
+\paragraph{Computations}
+With the following exceptions, the typing judgement $\ctx \ent c : \C$ has a
+straightforward definition. The $\ret$ construct renders a value $v$ as a pure
+computation, i.e., with empty dirt. An operation invocation $\op\,v$ is typed
+according to the operation's signature, with the operation itself as its only
+operation. Finally,
+rule \textsc{With} shows that a handler with type $\C \hto \D$
+transforms a computation with type $\C$ into a computation with type $\D$.
 
 \begin{figure}
 \begin{center}
