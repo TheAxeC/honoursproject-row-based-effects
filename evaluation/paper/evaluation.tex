@@ -10,7 +10,6 @@
 \postdate{\par}
 
 \usepackage{graphicx}
-\usepackage{mathpartir}
 \usepackage{amssymb}
 \usepackage{xspace}
 \usepackage{stmaryrd}
@@ -33,24 +32,44 @@
 	margin=3cm
 }
 
-\title{\vspace{-2cm}Honoursprogramme: Research track, option B (9 ECTS) \\\mbox{}\\ {A core language with row-based effects for optimised compilation}}
-\author{Student: Axel Faes\\{ Promotor: Prof. dr. ir. Tom Schrijvers}\\{Daily supervisors:  Prof. dr. ir. Tom Schrijvers \&\\ Amr Hany Shehata Saleh}\\\mbox{}\\{Master in de ingenieurswetenschappen: \\computerwetenschappen}\\{Specialisatie: Artificial Intelligence}\\{Fase 1}}
+\title{\vspace{-2cm}Honoursprogramme: Research track \\\mbox{}{A core language with row-based effects for optimised compilation}}
+\author{Student: Axel Faes\\{ Promotor: Prof. dr. ir. Tom Schrijvers}\\{Daily supervisors:  Prof. dr. ir. Tom Schrijvers \&\\ Amr Hany Shehata Saleh}\\\mbox{}\\{Master in de ingenieurswetenschappen: \\computerwetenschappen (Fase 2)}\\{Specialisatie: Artificial Intelligence}}
 \date{April 2017 - September 2017}
 
 \begin{document}
 
 \maketitle
 
-\tableofcontents
+\section{Introduction}
+My second honoursproject builds on top of the first honoursproject. During the first honoursproject, I worked on optimizing algebraic effect handlers. My second honoursproject is on working towards a core language with row-based effects for optimised compilation. \\
+\\
+I find it was a good choice to work on a very related topic for my second honoursproject. There are several advantages to this. First of all, I get to work with the same professor, Tom Schrijvers. Another advantage is the fact that I have previous knowledge. For example, I know which authors to look up when I need to search for new papers. These aspects make it such that I can start delving deeper into the research world. These aspects are also a big reason why I could submit my work to the \textit{ICFP Student Research Competition}. \\
+\\
+Ofcourse, there are also some disadvantages. During the intervision moments of the honoursprogramme, I noticed that several students are working on projects outside their knowledge base. Someone was working on a project within the Department of Mechanical Engineering while his knowledge base lies within Computer Science and Electrical Engineering. In other words, these students could experience research within another field of Engineering Science and thus broaden their knowledge base. \\
+\\
+I also have several interests outside of Computer Science. Doing both honoursprojects with professor Tom Schrijvers also meant that I couldn't explore those interests. However, it isn't possible to do everything and choices have to be made. I am happy that I choose to continue to do an honoursproject with professor Tom Schrijvers since I feel that I have grown a lot as a young researcher.
 
-\section{Reflection}
-\input{reflection}
+\section{ICFP: Student Research Competition}
+I had the opportunity to submit my work for the Student Research Competition of ICFP (International Conference on Functional Programming). For this, I had to submit an extended abstract of 2 pages. It was interesting to have to write the entire extended abstract myself, as compared to writing some sections during my previous honoursproject. There are a lot of aspects to think about such as the structure of the paper, using the right words, etc. This thus belongs to the \textbf{Written communication} competency.
 
-\section{Conclusions}
-\input{conclusion}
+\subsection{Conference reflection}
+After the paper was accepted, I could go to ICFP and attend the conference. This year, 2017, ICFP was held in the Mathematical Institute of Oxford University. Just prior to my first honoursproject, I attended IFL (Symposium, 2016, Leuven) but ICFP was my first actual conference I attended. \\
+\\
+During the conference, I had the opportunity to do a lot of networking. I was able to meet a lot of researchers from all over the world. I also attented a lot of talks that were given. I was able to expand my knowledge of the theoretical and mathematical foundations of computer science a bit. I got to see which subfields are being actively researched aside from algebraic effect handlers. The talks were also interesting to see how scientific presentations are done. It was interesting to how the researchers inserted humour and how they kept the content "simple" in order to not lose the audience. \\
+\\
+I also attended a hands-on tutorial about Concurrent Programming with Effect Handlers. This tutorial was part of the co-hosted conference CUFP (Commercial Users of Functional Programming). This tutorial truly made me aware just how powerful algebraic effects and handlers can be, and how active the research field is.\\
+\\
+For the Student Research Competition, I also had to give a poster presentation. A jury consisting of several leading experts in the field selected three finalists. I was among the three finalists and thus had to give an actual presentation at ICFP. This was the climax of my honoursproject (although my honoursproject was not finished yet). It was really cool to be able to give a presentation at a big conference. In the end, I managed to win the bronze medal.
 
-\appendix
-\input{zelfreflectie}
+\subsection{Time management}
+During my previous honoursproject reflection, I mentioned how important time management was. This was mainly due to the fact that I had to combine the honoursproject with following courses. I did not experience time management issues like this during this honoursproject. However, regarding ICFP, I had a lot of deadlines. The deadline to submit the extended abstract and the maximum duration of the talk I had to give, are two aspects where time management was important.
 
+\subsection{Implementation}
+The implementation I made spans about 19 files with 408 blank lines, 548 comments and 1982 lines of code. The total count for the entire compiler is 71 files with 1206 blank lines, 1757 comments and 6899 lines of code. My implementation consists of a type inference engine. Thus, I had to rewrite large parts of the existing compiler and throw away the previous type inference engine.\\
+\\
+My goal with the implementation was to first implement the inference engine. After this, I wanted to adapt the optimization module to work with the new type system. However, making a new type system, going to ICFP, implementing the inference engine and adapting and experimenting with the optimization module was too much. In the end, I didn't adapt and experiment with the optimization module.
+
+\subsection{Conclusion}
+To conclude, I'll quote a sentence from my previous reflection: "something that definitely needs to be said is that I'm proud of what I've accomplished during this honoursproject". I have learnt a lot about research and myself. I never expected to be able to actually win a bronze medal at the ICFP Student Research Competition. I think that the ICFP Student Research Competition was a great way to end my honoursproject and complete the honoursprogramme.
 
 \end{document}
