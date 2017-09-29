@@ -10,8 +10,9 @@ This is my main log file for the honoursprogramme. Weekly progress will be recor
 | time creating type system | ~20 hours |
 | time implementation part 1 | ~80 hours  |
 | time creating poster | ~16 hours  |
-| ICFP 2017 | 6 * 9 = 54 |
-| total time | 20 + 40 + 40 + 20 + 50 + 16 + 54 = 270 hours |
+| ICFP 2017 | 6 (days) * 9 (hours) = 54 hours |
+| Time to finish implementation  | ~50 hours  |
+| total time | 20 + 40 + 40 + 20 + 50 + 16 + 54 + 40 = 320 hours |
 | Approximate time required | ~270 |
 
 ## Meetings
@@ -71,6 +72,11 @@ Towards a core language with row-based effects for optimised compilation
 
 Algebraic effects and handlers are a very active area of research. An important aspect is the development of an optimising compiler. Eff is an ML-style language with support for effects and forms the testbed for the optimising compiler. However, Eff does not offer explicit typing, which makes it easy for type checking bugs to be introduced during the construction of optimised compilation. This work presents a new core language with row-based effects. The core language is explicitly typed in order to reduce bugs in the optimised compilation.
 
+### Feedback from ICFP Comission
+This is a very interesting proposal, and I'd like to see it presented as a poster.
+
+As a suggestion regarding the forthcoming presentation, I'd recommend to substantiate the claim "Eff does not offer explicit typing, which makes it easy for type checking bugs to be introduced during the construction of optimised compilation" from the introduction by showing an example of a bug that can be manifested at an intermediate stage of a compilation and would be caught earlier if only Eff had explicit type annotations. Next you will demonstrate how your approach fixes this problem.
+
 ## Start implementation (July - September 2017)
 
 ## July 16 - July 20
@@ -91,6 +97,9 @@ Implementation
 
 ### September 2 - 10
 ICFP 2017
+
+### September 11 - 27
+Finishing implementation
 
 ## Achievements
 - Completed literature study
